@@ -1,0 +1,108 @@
+#include <iostream>
+#include <math.h>
+#include <string.h>
+using namespace std;
+// primer punto parcial
+bool anagrama(char pal1[], char pal2[]);
+char cadena1[] = "AMOR";
+char cadena2[] = "mora";
+
+
+//Segundo punto parcial
+int arrayX[]={1,2,3};
+int arrayY[]={4,8,9};
+int ProPuyProCru(int arrayi[], int arrayj[]);
+
+//tercer punto parcial
+float convertirIma(float a, float b, bool cambio);
+int num1=10;//Para fasores este es la magnitud y para complejos es la parte real
+int num2=15;//para fasores este es el agngulo y para complejos es la parte imaginaria
+bool oper =1;//variables booleana que nos indica si se convierte de complejos a fasores o viceversa
+int main()
+{
+    //pimer punto parcial
+    bool si = anagrama(cadena1, cadena2);
+    cout<<si<<"\n";
+    //segundo punto parcial
+    ProPuyProCru(arrayX, arrayY);
+    //tercer punto parcial
+    convertirIma(num1, num2, oper);
+    return 0;
+}
+
+bool anagrama(char pal1[], char pal2[])
+{
+   int val1 [10];
+   int val2 [10];
+   int var1=0,var2=0;
+    for(int i=0; i<strlen(pal1); i++)//ciclo que recorre el primer arreglo
+    {
+        pal1[i] = tolower(pal1[i]);
+        pal2[i] = tolower(pal2[i]);
+        val1[i]=pal1[i];
+        var1=var1+val1[i];
+        val2[i]=pal2[i];
+        var2=var2+val2[i];
+    }
+    if(var1 == var2)//en caso de que cont sea igual al tamaño del primer arreglo retorne 1
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+
+}
+
+
+int ProPuyProCru(int arrayi[], int arrayj[])
+{
+    //Producto cruz
+    int vecresul[2];//Este vector se utiliza para almacena el resultado del producto cruz
+    int ProCrui = (arrayi[1]*arrayj[2]-(arrayi[2]*arrayj[1]));//Esta es la operación matemática para el producto cruz en i
+    int ProCruj = -((arrayi[0]*arrayj[2]-(arrayi[2]*arrayj[0])));//Esta es la operación matemática para el producto cruz en j
+    int ProCruk = (arrayi[0]*arrayj[1]-(arrayi[1]*arrayj[0]));//Esta es la operación matemática para el producto cruz en k
+    //A continuación se llena el vector resultado con los valores obtendidos
+    vecresul[0]=ProCrui;
+    vecresul[1]=ProCruj;
+    vecresul[2]=ProCruk;
+    //Se imprime el resultado
+    cout<<"El producto cruz de los vectores es: "<<"\n";
+    cout<<"\n";
+    cout<<"{"<< vecresul[0]<<";"<< vecresul[1]<<";"<< vecresul[2]<<"}"<<"\n";
+    cout<<"\n";
+
+    //ProductoPunto
+    int resul = 0;//Se crea la variable para almacenar el resultado
+    for(int i=0; i<3; i++)//Ciclo para recorrer las posiciones delos vectores
+    {
+        resul = resul + (arrayi[i]*arrayj[i]);//formula para obtener el producto punto entre los vectores
+    }
+    //Se imprime el resultado
+    cout<<"El producto punto es: "<<resul<<"\n";
+    cout<<"\n";
+}
+
+float convertirIma(float a, float b, bool cambio)
+{
+    float result[1];
+    if(cambio==0)//si cambio es igual a cro, se pasa de complejo a fasores
+    {
+        float Mag=sqrt(pow(a,2)+pow(b,2));//ecuacion para la magnitud partiendo de complejos
+        float fase = atan(b/a);// ecuacion para el angulo partiendo de coplejos
+        cout<<"la conversion de complejo a fasores es: "<<"\n";
+        cout <<"La magnitud es: "<<Mag<<" y "<<"su fase es: "<<fase<<"\n";
+        cout<<"\n";
+    }
+    else //si cambio no es 0 se realiza fasores a complejos
+    {
+        float repa = a*(cos(b));//ecuacion para la parte real partiendo de fasores
+        float impa = a*(sin(b));//ecuacion para la parte imaginaria partiendo de fasores
+        result[0]=repa;//asignacion de la parte real al vector
+        result[1]=impa;//asignacion de la parte imaginaria al vector
+        cout<<"{"<< result[0]<<";"<< result[1]<<"}"<<"\n";
+        cout<<"\n";
+    }
+
+}
